@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
 import {
   ResponsiveContainer,
   BarChart,
@@ -113,8 +113,8 @@ export default function IncomeExpenseChart({ year }: IncomeExpenseChartProps) {
   }, [year, user]);
 
   return (
-    <Card className="bg-[#161b33] text-white">
-      <CardContent className="p-4">
+    <HoverCard className="bg-black text-white">
+      <HoverCardContent className="p-4">
         <h2 className="text-lg font-semibold mb-2">
           Income & Expenses by Month (F.Y. {year})
         </h2>
@@ -124,35 +124,35 @@ export default function IncomeExpenseChart({ year }: IncomeExpenseChartProps) {
         )}
 
         {error && (
-          <div className="text-center text-red-400">{error}</div>
+          <div className="text-center text-white">{error}</div>
         )}
 
         {!loading && !error && data.length > 0 && (
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data}>
-                <XAxis dataKey="month" stroke="#aaa" />
-                <YAxis stroke="#aaa" />
+                <XAxis dataKey="month" stroke="#ffffff" />
+                <YAxis stroke="#ffffff" />
                 <Tooltip
-                  contentStyle={{ backgroundColor: "#1e213a", border: "none" }}
-                  labelStyle={{ color: "#c3c3c3" }}
-                  itemStyle={{ color: "#fff" }}
+                  contentStyle={{ backgroundColor: "#000000", border: "1px solid #333" }}
+                  labelStyle={{ color: "#ffffff" }}
+                  itemStyle={{ color: "#ffffff" }}
                   formatter={(value: number, key: string) => [`₹${value}`, key]}
                 />
-                <Legend wrapperStyle={{ color: "#fff" }} />
-                <Bar dataKey="income" fill="#34d399" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="expenses" fill="#f87171" radius={[4, 4, 0, 0]} />
+                <Legend wrapperStyle={{ color: "#ffffff" }} />
+                <Bar dataKey="income" fill="#ffffff" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="expenses" fill="#888888" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         )}
 
         {!loading && !error && data.length === 0 && (
-          <div className="text-center text-gray-400">
+          <div className="text-center text-white">
             No data available for {year}.
           </div>
         )}
-      </CardContent>
-    </Card>
+      </HoverCardContent>
+    </HoverCard>
   );
 }

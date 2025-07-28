@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -133,53 +133,45 @@ export default function LatestTransactionsTable({ month, year }: LatestTransacti
   };
 
   return (
-    <Card className="bg-[#161b33] text-white">
-      <CardContent className="p-4">
-        <div className="flex justify-between items-center mb-4">
+    <HoverCard className="bg-black text-white">
+      <HoverCardContent className="p-4">
+        <div className="mb-4">
           <h2 className="text-lg font-semibold">Latest Transactions</h2>
-          <Button
-            onClick={handleDownloadStatement}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 flex items-center gap-2"
-            disabled={loading || allMonthlyTransactions.length === 0}
-          >
-            <Download size={16} />
-            Download Statement
-          </Button>
         </div>
 
-        <p className="text-sm mb-4 text-muted-foreground">
+        <p className="text-sm mb-4 text-gray-300">
           For {selectedMonthName}, {year}
         </p>
 
         {loading ? (
-          <div className="h-60 flex items-center justify-center text-gray-400">
+          <div className="h-60 flex items-center justify-center text-white">
             Loading transactions...
           </div>
         ) : error ? (
-          <div className="h-60 flex items-center justify-center text-red-400">{error}</div>
+          <div className="h-60 flex items-center justify-center text-white">{error}</div>
         ) : transactionsToDisplay.length > 0 ? (
           <ScrollArea className="h-60 pr-6">
             <ul className="space-y-4">
               {transactionsToDisplay.map((txn) => (
                 <li
                   key={txn.id}
-                  className="flex items-center justify-between border-b border-white/10 pb-2"
+                  className="flex items-center justify-between border-b border-white/20 pb-2"
                 >
                   <div>
                     <p className="font-medium">{txn.title}</p>
-                    <p className="text-sm text-muted-foreground">{formatDate(txn.date)}</p>
+                    <p className="text-sm text-gray-300">{formatDate(txn.date)}</p>
                   </div>
                   <div className="text-right">
                     <p
                       className={`font-semibold ${
-                        txn.amount > 0 ? "text-green-400" : "text-red-400"
+                        txn.amount > 0 ? "text-white" : "text-white"
                       }`}
                     >
                       {txn.amount > 0 ? "+" : ""}₹{Math.abs(txn.amount).toFixed(2)}
                     </p>
                     <Badge
                       variant="secondary"
-                      className="mt-1 bg-gray-700 text-gray-200 hover:bg-gray-600"
+                      className="mt-1 bg-white text-black hover:bg-gray-200"
                     >
                       {txn.type}
                     </Badge>
@@ -189,11 +181,22 @@ export default function LatestTransactionsTable({ month, year }: LatestTransacti
             </ul>
           </ScrollArea>
         ) : (
-          <div className="h-60 flex items-center justify-center text-gray-400">
+          <div className="h-60 flex items-center justify-center text-white">
             No transactions found for {selectedMonthName}, {year}.
           </div>
         )}
-      </CardContent>
-    </Card>
+        
+        <div className="mt-4 flex justify-center">
+          <Button
+            onClick={handleDownloadStatement}
+            className="bg-white text-black hover:bg-gray-100 hover:text-black px-4 py-2 flex items-center gap-2 border border-gray-300"
+            disabled={loading || allMonthlyTransactions.length === 0}
+          >
+            <Download size={16} />
+            Download Statement
+          </Button>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   );
 }

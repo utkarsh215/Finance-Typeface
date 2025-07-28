@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { Card, CardContent } from "@/components/ui/card";
+import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
 import { collection, getDocs, query, Timestamp, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
@@ -25,8 +25,8 @@ interface CategoryDataPoint {
 }
 
 const COLORS = [
-  "#60a5fa", "#fcd34d", "#a78bfa", "#34d399", "#f87171",
-  "#818cf8", "#fb923c", "#c084fc", "#2dd4bf", "#e879f9",
+  "#ffffff", "#e0e0e0", "#c0c0c0", "#a0a0a0", "#808080",
+  "#606060", "#404040", "#303030", "#202020", "#101010",
 ];
 
 const parseDate = (raw: Timestamp | string | Date | null | undefined): Date | null => {
@@ -94,21 +94,21 @@ export default function SpendingCategoryChart({ month, year }: SpendingCategoryC
   }, [month, year, user]);
 
   return (
-    <Card className="bg-[#161b33] text-white">
-      <CardContent className="p-4">
+    <HoverCard className="bg-black text-white">
+      <HoverCardContent className="p-4">
         <h2 className="text-lg font-semibold mb-2">Spending by Category</h2>
-        <p className="text-sm mb-4 text-muted-foreground">
+        <p className="text-sm mb-4 text-gray-300">
           For {selectedMonthName}, {year}
         </p>
 
         {loading && (
-          <div className="h-56 flex items-center justify-center text-gray-400">
+          <div className="h-56 flex items-center justify-center text-white">
             Loading category data...
           </div>
         )}
 
         {error && (
-          <div className="h-56 flex items-center justify-center text-red-400">
+          <div className="h-56 flex items-center justify-center text-white">
             {error}
           </div>
         )}
@@ -137,12 +137,12 @@ export default function SpendingCategoryChart({ month, year }: SpendingCategoryC
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#1e213a",
+                    backgroundColor: "#000000",
                     borderRadius: 8,
-                    border: "none",
+                    border: "1px solid #333",
                   }}
-                  labelStyle={{ color: "#c3c3c3" }}
-                  itemStyle={{ color: "#fff" }}
+                  labelStyle={{ color: "#ffffff" }}
+                  itemStyle={{ color: "#ffffff" }}
                   formatter={(value: number, name: string) => [
                     `₹${value.toFixed(2)}`,
                     name,
@@ -152,7 +152,7 @@ export default function SpendingCategoryChart({ month, year }: SpendingCategoryC
                   layout="horizontal"
                   align="center"
                   verticalAlign="bottom"
-                  wrapperStyle={{ color: "#fff", paddingTop: 16 }}
+                  wrapperStyle={{ color: "#ffffff", paddingTop: 16 }}
                   iconType="circle"
                 />
               </PieChart>
@@ -162,11 +162,11 @@ export default function SpendingCategoryChart({ month, year }: SpendingCategoryC
 
 
         {!loading && !error && data.length === 0 && (
-          <div className="h-56 flex items-center justify-center text-gray-400">
+          <div className="h-56 flex items-center justify-center text-white">
             No spending data for {selectedMonthName}, {year}.
           </div>
         )}
-      </CardContent>
-    </Card>
+      </HoverCardContent>
+    </HoverCard>
   );
 }

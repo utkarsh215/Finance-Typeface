@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
 import { collection, getDocs, query, where, Timestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
@@ -134,8 +134,8 @@ export default function TotalBalanceCard({ month, year }: TotalBalanceCardProps)
   }, [user, month, year]);
 
   return (
-    <Card className="bg-[#161b33] text-white">
-      <CardContent className="p-4 space-y-4">
+    <HoverCard className="bg-black text-white">
+      <HoverCardContent className="p-4 space-y-4">
         <h2 className="text-lg font-semibold">Total Balance</h2>
 
         <div className="text-4xl font-bold">
@@ -145,7 +145,7 @@ export default function TotalBalanceCard({ month, year }: TotalBalanceCardProps)
         {change !== null && (
           <p
             className={`text-sm flex items-center gap-1 ${
-              change >= 0 ? "text-green-400" : "text-red-400"
+              change >= 0 ? "text-white" : "text-white"
             }`}
           >
             {change >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
@@ -154,10 +154,10 @@ export default function TotalBalanceCard({ month, year }: TotalBalanceCardProps)
         )}
 
         <div className="flex justify-between gap-4 text-sm mt-2">
-          <p className="text-green-400">
+          <p className="text-white">
             Income: <span className="font-semibold">₹{currentIncome.toFixed(2)}</span>
           </p>
-          <p className="text-red-400">
+          <p className="text-white">
             Expense: <span className="font-semibold">₹{currentExpense.toFixed(2)}</span>
           </p>
         </div>
@@ -165,28 +165,28 @@ export default function TotalBalanceCard({ month, year }: TotalBalanceCardProps)
         <div className="h-24">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data}>
-              <XAxis dataKey="month" stroke="#8884d8" />
+              <XAxis dataKey="month" stroke="#ffffff" />
               <YAxis hide />
               <Tooltip
-                contentStyle={{ backgroundColor: "#1e213a", border: "none" }}
-                labelStyle={{ color: "#c3c3c3" }}
+                contentStyle={{ backgroundColor: "#000000", border: "1px solid #333" }}
+                labelStyle={{ color: "#ffffff" }}
               />
               <Line
                 type="monotone"
                 dataKey="balance"
-                stroke="#ffb347"
+                stroke="#ffffff"
                 strokeWidth={2}
                 dot={{
                   r: 4,
-                  stroke: "#ffb347",
+                  stroke: "#ffffff",
                   strokeWidth: 2,
-                  fill: "#161b33",
+                  fill: "#000000",
                 }}
               />
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </CardContent>
-    </Card>
+      </HoverCardContent>
+    </HoverCard>
   );
 }

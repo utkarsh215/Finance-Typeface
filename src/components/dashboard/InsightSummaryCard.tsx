@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { BadgeCheck, Lightbulb, TrendingUp } from "lucide-react";
@@ -147,16 +147,16 @@ Savings: ₹${savings.toFixed(2)}
 
   // Insight type to icon map
   const iconMap = [
-    <Lightbulb key="income" className="text-yellow-300 w-5 h-5 mt-1" />,
-    <BadgeCheck key="spending" className="text-teal-300 w-5 h-5 mt-1" />,
-    <TrendingUp key="tip" className="text-purple-300 w-5 h-5 mt-1" />,
+    <Lightbulb key="income" className="text-white w-5 h-5 mt-1" />,
+    <BadgeCheck key="spending" className="text-white w-5 h-5 mt-1" />,
+    <TrendingUp key="tip" className="text-white w-5 h-5 mt-1" />,
   ];
 
   return (
-    <Card className="bg-[#161b33] text-white h-full min-h-[250px]">
-      <CardContent className="p-5 flex flex-col gap-4">
+    <HoverCard className="bg-black text-white h-full min-h-[250px] rounded-none rounded-l-lg">
+      <HoverCardContent className="p-5 flex flex-col gap-4 h-full">
         <h2 className="text-xl font-bold">📘 AI Financial Insights</h2>
-        <p className="text-sm text-muted-foreground mb-1">
+        <p className="text-sm text-gray-300 mb-1">
           For{" "}
           <span className="text-white font-medium">
             {monthName} {year}
@@ -165,14 +165,14 @@ Savings: ₹${savings.toFixed(2)}
 
         {/* Loading state */}
         {loading && (
-          <p className="text-blue-200 text-center text-base py-6">
+          <p className="text-white text-center text-base py-6">
             ⏳ Analyzing your financial data with Gemini...
           </p>
         )}
 
         {/* Error state */}
         {error && (
-          <p className="text-red-400 text-center text-base py-6">{error}</p>
+          <p className="text-white text-center text-base py-6">{error}</p>
         )}
 
         {/* Valid insights display */}
@@ -184,9 +184,9 @@ Savings: ₹${savings.toFixed(2)}
                 className="flex items-start gap-3 text-base leading-relaxed"
               >
                 {iconMap[idx] || (
-                  <BadgeCheck className="text-green-300 w-5 h-5 mt-1" />
+                  <BadgeCheck className="text-white w-5 h-5 mt-1" />
                 )}
-                <p className="text-blue-100">
+                <p className="text-white">
                   <span className="font-semibold text-white">
                     {idx === 0
                       ? "Income Insight: "
@@ -203,11 +203,11 @@ Savings: ₹${savings.toFixed(2)}
 
         {/* No data fallback */}
         {!loading && !error && insightPoints.length === 0 && (
-          <p className="text-gray-400 text-center py-6">
+          <p className="text-white text-center py-6">
             No insights available yet. Add some transactions to get started!
           </p>
         )}
-      </CardContent>
-    </Card>
+      </HoverCardContent>
+    </HoverCard>
   );
 }

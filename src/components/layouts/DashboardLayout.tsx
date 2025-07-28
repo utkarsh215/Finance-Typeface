@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <div className="h-screen bg-background text-foreground pt-16"> {/* Removed flex and sidebar */}
-      <main className="w-full max-w-7xl mx-auto overflow-y-auto p-6">{children}</main>
+      <main className="w-full max-w-7xl mx-auto overflow-y-auto px-6 py-6">{children}</main>
       <Toaster />
     </div>
   );

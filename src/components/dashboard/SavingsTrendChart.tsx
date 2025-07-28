@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import {
@@ -127,12 +127,12 @@ export default function SavingsTrendChart({ year }: SavingsTrendChartProps) {
   };
 
   return (
-    <Card className="bg-[#161b33] text-white">
-      <CardContent className="p-4">
+    <HoverCard className="bg-black text-white">
+      <HoverCardContent className="p-4">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-lg font-semibold">Savings Trend - {year}</h2>
           <Button
-            className="text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-md text-sm"
+            className="text-black bg-white hover:bg-gray-100 hover:text-black px-3 py-1.5 rounded-md text-sm border border-gray-300"
             onClick={handleDownloadCSV}
             disabled={loading || data.length === 0}
           >
@@ -141,16 +141,16 @@ export default function SavingsTrendChart({ year }: SavingsTrendChartProps) {
         </div>
 
         {loading ? (
-          <p className="text-gray-400">Loading savings trend...</p>
+          <p className="text-white">Loading savings trend...</p>
         ) : (
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#2d3652" />
-              <XAxis dataKey="month" stroke="#c3c3c3" />
-              <YAxis stroke="#c3c3c3" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#333333" />
+              <XAxis dataKey="month" stroke="#ffffff" />
+              <YAxis stroke="#ffffff" />
               <Tooltip
-                contentStyle={{ backgroundColor: "#1e213a", borderRadius: 8 }}
-                labelStyle={{ color: "#c3c3c3" }}
+                contentStyle={{ backgroundColor: "#000000", borderRadius: 8, border: "1px solid #333" }}
+                labelStyle={{ color: "#ffffff" }}
                 formatter={(value: number, name: string) => [
                   `₹${value.toFixed(2)}`,
                   name.charAt(0).toUpperCase() + name.slice(1),
@@ -159,15 +159,15 @@ export default function SavingsTrendChart({ year }: SavingsTrendChartProps) {
               <Line
                 type="monotone"
                 dataKey="savings"
-                stroke="#34d399"
+                stroke="#ffffff"
                 strokeWidth={3}
-                dot={{ r: 4 }}
-                activeDot={{ r: 6 }}
+                dot={{ r: 4, fill: "#000000", stroke: "#ffffff" }}
+                activeDot={{ r: 6, fill: "#000000", stroke: "#ffffff" }}
               />
             </LineChart>
           </ResponsiveContainer>
         )}
-      </CardContent>
-    </Card>
+      </HoverCardContent>
+    </HoverCard>
   );
 }
