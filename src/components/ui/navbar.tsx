@@ -3,7 +3,17 @@
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import {
+  Menu,
+  X,
+  LayoutDashboard,
+  BarChart2,
+  IndianRupee,
+  TrendingDown,
+  User,
+  Settings,
+  FileUp
+} from "lucide-react";
 
 export function Navbar() {
   const { user } = useAuth();
@@ -16,7 +26,9 @@ export function Navbar() {
   return (
     <nav className="bg-black text-white py-4 px-6 shadow-md fixed w-full z-50">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-xl font-bold">Finance App</Link>
+        <Link href="/" className="text-xl font-bold flex items-center gap-2">
+          <span className="text-2xl">💸</span> Finance-typeface
+        </Link>
         
         {/* Mobile menu button */}
         <button 
@@ -28,19 +40,32 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6">
-          <Link href="/" className="hover:text-purple-400 transition-colors">Home</Link>
+          {!user && <Link href="/" className="hover:text-gray-300 transition-colors flex items-center gap-1">Home</Link>}
           {user ? (
             <>
-              <Link href="/dashboard" className="hover:text-purple-400 transition-colors">Dashboard</Link>
-              <Link href="/income" className="hover:text-purple-400 transition-colors">Income</Link>
-              <Link href="/expense" className="hover:text-purple-400 transition-colors">Expenses</Link>
-              <Link href="/statistics" className="hover:text-purple-400 transition-colors">Statistics</Link>
-              <Link href="/account" className="hover:text-purple-400 transition-colors">Account</Link>
+              <Link href="/dashboard" className="hover:text-gray-300 transition-colors flex items-center gap-1">
+                <LayoutDashboard className="w-4 h-4" /> Dashboard
+              </Link>
+              <Link href="/income" className="hover:text-gray-300 transition-colors flex items-center gap-1">
+                <IndianRupee className="w-4 h-4" /> Income
+              </Link>
+              <Link href="/expense" className="hover:text-gray-300 transition-colors flex items-center gap-1">
+                <TrendingDown className="w-4 h-4" /> Expenses
+              </Link>
+              <Link href="/upload-transactions" className="hover:text-gray-300 transition-colors flex items-center gap-1">
+                <FileUp className="w-4 h-4" /> Upload Bank Statement
+              </Link>
+              <Link href="/statistics" className="hover:text-gray-300 transition-colors flex items-center gap-1">
+                <BarChart2 className="w-4 h-4" /> Statistics
+              </Link>
+              <Link href="/account" className="hover:text-gray-300 transition-colors flex items-center gap-1">
+                <User className="w-4 h-4" /> Account
+              </Link>
             </>
           ) : (
             <>
-              <Link href="/login" className="hover:text-purple-400 transition-colors">Login</Link>
-              <Link href="/register" className="hover:text-purple-400 transition-colors">Register</Link>
+              <Link href="/login" className="hover:text-gray-300 transition-colors">Login</Link>
+              <Link href="/register" className="hover:text-gray-300 transition-colors">Register</Link>
             </>
           )}
         </div>
@@ -50,49 +75,58 @@ export function Navbar() {
       {isMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-black p-4 shadow-md">
           <div className="flex flex-col space-y-3">
-            <Link 
-              href="/" 
-              className="hover:text-purple-400 transition-colors py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
+            {!user && (
+              <Link 
+                href="/" 
+                className="hover:text-gray-300 transition-colors py-2 flex items-center gap-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+            )}
             {user ? (
               <>
                 <Link 
                   href="/dashboard" 
-                  className="hover:text-purple-400 transition-colors py-2"
+                  className="hover:text-gray-300 transition-colors py-2 flex items-center gap-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Dashboard
+                  <LayoutDashboard className="w-5 h-5" /> Dashboard
                 </Link>
                 <Link 
                   href="/income" 
-                  className="hover:text-purple-400 transition-colors py-2"
+                  className="hover:text-gray-300 transition-colors py-2 flex items-center gap-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Income
+                  <IndianRupee className="w-5 h-5" /> Income
                 </Link>
                 <Link 
                   href="/expense" 
-                  className="hover:text-purple-400 transition-colors py-2"
+                  className="hover:text-gray-300 transition-colors py-2 flex items-center gap-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Expenses
+                  <TrendingDown className="w-5 h-5" /> Expenses
+                </Link>
+                <Link 
+                  href="/upload-transactions" 
+                  className="hover:text-gray-300 transition-colors py-2 flex items-center gap-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <FileUp className="w-5 h-5" /> Upload Bank Statement
                 </Link>
                 <Link 
                   href="/statistics" 
-                  className="hover:text-purple-400 transition-colors py-2"
+                  className="hover:text-gray-300 transition-colors py-2 flex items-center gap-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Statistics
+                  <BarChart2 className="w-5 h-5" /> Statistics
                 </Link>
                 <Link 
                   href="/account" 
-                  className="hover:text-purple-400 transition-colors py-2"
+                  className="hover:text-gray-300 transition-colors py-2 flex items-center gap-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Account
+                  <User className="w-5 h-5" /> Account
                 </Link>
               </>
             ) : (
