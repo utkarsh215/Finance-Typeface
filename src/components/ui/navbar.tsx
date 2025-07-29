@@ -55,9 +55,9 @@ export function Navbar() {
               <Link href="/upload-transactions" className="hover:bg-white hover:text-black transition-colors flex items-center gap-1 px-3 py-1 rounded">
                 <FileUp className="w-4 h-4" /> Upload Bank Statement
               </Link>
-              <Link href="/statistics" className="hover:bg-white hover:text-black transition-colors flex items-center gap-1 px-3 py-1 rounded">
+              {/* <Link href="/statistics" className="hover:bg-white hover:text-black transition-colors flex items-center gap-1 px-3 py-1 rounded">
                 <BarChart2 className="w-4 h-4" /> Statistics
-              </Link>
+              </Link> */}
               <Link href="/account" className="hover:bg-white hover:text-black transition-colors flex items-center gap-1 px-3 py-1 rounded">
                 <User className="w-4 h-4" /> Account
               </Link>
