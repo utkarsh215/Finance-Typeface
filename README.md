@@ -13,7 +13,7 @@
   - **Email:** `testuser01@gmail.com`  
   - **Password:** `123456`  
 - **📺 Walkthrough Video:**  
-  [Watch on Google Drive](https://drive.google.com/file/d/19nGVZaV0aUOrgFiwiyYriUHxpfQJounc/view?usp=sharing)
+  [Watch on loom]([https://drive.google.com/file/d/19nGVZaV0aUOrgFiwiyYriUHxpfQJounc/view?usp=sharing](https://www.loom.com/share/0ab70fd4dd904a02a9d0e2601c37dff5?sid=68485c86-48c0-4650-91ff-84faff1cc97c))
 
 ---
 
