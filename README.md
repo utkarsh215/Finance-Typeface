@@ -74,8 +74,6 @@ Server (Next.js API Routes)
 ├── /api/amount-extract   → Vision + Gemini → { amount, category, date, … }
 ├── /api/file-transaction → Parse CSV/XLS/PDF → classify lines
 ├── /api/insight          → Gemini → monthly summary & tips
-├── /api/stats/insights   → stored AI insights
-└── /api/stats/summary    → raw stats aggregation
 
 Firestore Collections
 ├── users/{uid}
