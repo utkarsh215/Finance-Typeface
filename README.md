@@ -8,7 +8,7 @@
 ## 🚀 Live Demo & Testing
 
 - **🔗 App (Vercel):**  
-  https://finance-typeface-nine.vercel.app  
+ https://finance-typeface.vercel.app/
 - **🧪 Test Credentials:**  
   - **Email:** `testuser01@gmail.com`  
   - **Password:** `123456`  
