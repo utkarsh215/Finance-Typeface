@@ -61,7 +61,7 @@
 ---
 
 ## Architecture Overview
-<img width="3840" height="2560" alt="Flow-Diagram" src="https://github.com/user-attachments/assets/0f3c3acd-0094-4865-a9f5-27baa92be225" />
+<img width="3840" height="2560" alt="Flow-Diagram" src="https://github.com/utkarsh215/Finance-Typeface/blob/main/Finance-typeface.png?raw=true" />
 
 
 ```
