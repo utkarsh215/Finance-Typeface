@@ -1,96 +1,86 @@
-# Finance-typeface
+# Finance‑typeface
 
-*A modern, privacy‑aware Personal Finance Assistant built with Next.js, Firebase, Tailwind CSS, and shadcn/ui.*
-
-> **Goal:** Provide an extensible SaaS‑style web app for tracking income & expenses, extracting data from receipts/statements (OCR + AI), generating monthly insights, and visualizing financial health trends.
-
----
-
-## 🚀 Live Demo
-
-**🔗 Deployed App:** [https://finance-typeface-nine.vercel.app](https://finance-typeface-nine.vercel.app)  
-**🧪 Test Login:**  
-- **Email:** `testuser@gmail.com`  
-- **Password:** `123456`  
-
-**🎥 Demo Video:** [Watch Demo Video](https://drive.google.com/file/d/19nGVZaV0aUOrgFiwiyYriUHxpfQJounc/view?usp=sharing)
+> **Your Privacy‑First Personal Finance Companion**  
+> Track incomes & expenses, auto‑extract data from receipts/statements, get AI‑powered monthly insights, and visualize your money habits—all in one sleek web app.
 
 ---
 
+## 🚀 Live Demo & Testing
 
-
-## Table of Contents
-
-1. [Key Features](#key-features)
-2. [Tech Stack](#tech-stack)
-3. [Architecture Overview](#architecture-overview)
-4. [Environment Variables](#environment-variables)
-5. [Local Development](#local-development)
-6. [Firebase Setup](#firebase-setup)
-7. [License](#license)
+- **🔗 App (Vercel):**  
+  https://finance-typeface-nine.vercel.app  
+- **🧪 Test Credentials:**  
+  - **Email:** `testuser01@gmail.com`  
+  - **Password:** `123456`  
+- **📺 Walkthrough Video:**  
+  [Watch on Google Drive](https://drive.google.com/file/d/19nGVZaV0aUOrgFiwiyYriUHxpfQJounc/view?usp=sharing)
 
 ---
 
-## Key Features
+## 🔍 What You Can Do
 
-* **Income & Expense Management**: Add, list, filter, paginate, and export transactions.
-* **Receipt & Payslip**: Upload images or PDFs → Google Cloud Vision extracts raw text.
-* **AI Amount & Category Extraction**: Gemini API → intelligent prefill for amount, source/category, date.
-* **Bank Statement Bulk Import**: Upload PDF/CSV/XLS(X) → server route parses + classifies lines (Credit/Debit → Income/Expense).
-* **Dynamic Dashboard**: Monthly filters, aggregated totals, income vs expense charts, savings trend, category breakdown pie charts.
-* **Insight Summary Card**: AI‑generated monthly insights & improvement suggestions (Gemini prompt with aggregated stats).
-* **Statistics Page**: Historical totals (multi‑year window), categorized expense analysis, savings analytics.
-* **Secure Auth**: Firebase Authentication (email/password) gated routes; client context for session state.
-* **Export Utilities**: Download CSV / XLS of filtered transactions; future PDF statement export.
-* **Responsive & Accessible**: Adaptive layout, keyboard focus states, semantic structure.
-
----
-
-## Tech Stack
-
-| Layer                 | Technologies                                                        |
-| --------------------- | ------------------------------------------------------------------- |
-| Frontend              | Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui, Recharts |
-| Backend (Edge/Server) | Next.js Route Handlers, Node APIs                                   |
-| Database              | Firebase Firestore                                                  |
-| Auth                  | Firebase Auth (email/password)                                      |
-| AI / OCR              | Google Cloud Vision API, Google Gemini (AI Studio)                  |
-| Deployment            | Netlify (build + hosting)                                           |
-| Tooling               | ESLint, TypeScript, (optional) Prettier, UUID, xlsx                 |
+1. **Manage Transactions**  
+   - Create, view, filter, paginate & export income/expense entries  
+2. **Scan Receipts & Payslips**  
+   - Upload images/PDFs → Google Cloud Vision pulls out the text  
+3. **Smart Data Extraction**  
+   - Gemini AI pre‑fills amount, date & category automatically  
+4. **Bulk Statement Import**  
+   - Drop in PDF/CSV/XLS(X) → server parses + classifies (Credit → Income, Debit → Expense)  
+5. **Dynamic Dashboard**  
+   - Monthly overviews, savings trends, income vs. expense charts, category pie‑breakdowns  
+6. **AI‑Generated Insights**  
+   - Monthly summary card with personalized tips powered by Gemini prompts  
+7. **Multi‑Year Statistics**  
+   - Dive into historical totals, detailed expense categories, and savings analytics  
+8. **Secure Login**  
+   - Firebase Auth (email/password) with protected routes & session context  
+9. **Export Options**  
+   - Download your filtered data as CSV/XLS—PDF statements coming soon  
+10. **Responsive & Accessible**  
+    - Mobile‑friendly layouts, keyboard‑focus support, semantic markup  
 
 ---
 
-## Architecture Overview
-<img width="3840" height="2560" alt="Flow-Diagram" src="https://github.com/utkarsh215/Finance-Typeface/blob/main/Finance-typeface.png?raw=true" />
+## 🛠️ Built With
 
+| Layer         | Tools & Services                                                                 |
+| ------------- | ------------------------------------------------------------------------------- |
+| Frontend      | Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui, Recharts              |
+| Server/API    | Next.js Route Handlers, Node.js                                                  |
+| Database      | Firebase Firestore                                                               |
+| Authentication| Firebase Auth (Email/Password)                                                   |
+| AI & OCR      | Google Cloud Vision API, Google Gemini (via AI Studio)                           |
+| Hosting       | Netlify                                                                          |
+| Dev Tools     | ESLint, (Prettier), TypeScript, UUID, xlsx                                        |
 
-```
-Browser (React Components)
-   │
-   ├─ AuthContext (Firebase Auth state)
-   ├─ Dashboard / Income / Expense / Statistics pages
-   │    │
-   │    ├─ Data Hooks (Firestore queries, month/year filters)
-   │    └─ UI Components (Charts, Forms, Tables)
-   │
-   ├─ Receipt / Statement Upload Components
-   │    │
-   │    └─ POST /api/amount-extract(amount/category extraction)
-   │
-   └─ Bulk Upload Page
-           └─ POST /api/file-transaction (parse + classify lines via Gemini)
+---
 
-Server (Route Handlers)
-   ├─ /api/amount-extract → Accepts file (image/pdf), runs Vision → structured JSON (amount, type, source/category, date)
-   ├─ /api/file-transaction → Extracts tabular entries (CSV/XLS/PDF) → Gemini classification
-   ├─ /api/insight → Summarize month stats with Gemini
-   ├─ /api/stats/insights → Gives insights generated through Gemini.
-   └─ /api/stats/summary → Summarize the data from a particular range of dates with Gemini
+## 🔧 Architecture at a Glance
 
-Firestore
-   ├─ users/{uid}
-   ├─ income/{doc}  (fields: uid, amount, source, date, createdAt)
-   └─ expenses/{doc} (fields: uid, amount, category, date, createdAt)
+<img width="100%" alt="High‑level flow diagram" src="https://github.com/utkarsh215/Finance-Typeface/blob/main/Finance-typeface.png?raw=true" />
+
+```plaintext
+Client (React + Tailwind UI)
+│
+├── AuthContext (Firebase session)
+├── Pages: Dashboard | Income | Expenses | Statistics
+│   ├── Data Hooks (Firestore queries + filters)
+│   └── UI Components (Tables, Charts, Forms)
+├── Receipt Upload → POST /api/amount-extract
+└── Bulk Import → POST /api/file-transaction
+
+Server (Next.js API Routes)
+├── /api/amount-extract   → Vision + Gemini → { amount, category, date, … }
+├── /api/file-transaction → Parse CSV/XLS/PDF → classify lines
+├── /api/insight          → Gemini → monthly summary & tips
+├── /api/stats/insights   → stored AI insights
+└── /api/stats/summary    → raw stats aggregation
+
+Firestore Collections
+├── users/{uid}
+├── income/{doc}: { uid, amount, source, date, createdAt }
+└── expenses/{doc}: { uid, amount, category, date, createdAt }
 ```
 ---
 
