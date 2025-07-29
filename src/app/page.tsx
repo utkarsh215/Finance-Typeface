@@ -101,7 +101,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="text-center py-4 text-sm text-gray-600 relative z-10 border-t border-gray-200 bg-white">
-        Developed by <span className="font-medium">Finance-typeface Team</span> — <span className="text-black font-semibold">Ojaswa Varshney</span>
+        Developed by <span className="font-medium">Finance-Typeface Team</span> — <span className="text-black font-semibold">Utkarsh Pradhan</span>
       </footer>
     </div>
   );

@@ -12,25 +12,26 @@ export default function IncomePage() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-6">
-        {/* Header */}
-        <div>
-          <h1 className="text-2xl font-bold ">Income Management</h1>
-          <p className="text-sm text-muted-foreground">
-            View, add, and analyze your income sources
-          </p>
+      <div className="flex flex-col gap-6 text-foreground">
+        {/* Dashboard Heading */}
+        <div className="text-center mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold">Income Management</h1>
         </div>
 
         {/* Charts + Form */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
             <IncomeChart refreshKey={refreshKey}/>
           </div>
-          <AddIncomeForm onAdded={() => setRefreshKey((prev) => prev + 1)} />
+          <div className="transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
+            <AddIncomeForm onAdded={() => setRefreshKey((prev) => prev + 1)} />
+          </div>
         </div>
 
         {/* Latest Incomes */}
-        <IncomeList refreshKey={refreshKey} />
+        <div className="transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
+          <IncomeList refreshKey={refreshKey} />
+        </div>
       </div>
     </DashboardLayout>
   );

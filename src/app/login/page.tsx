@@ -49,7 +49,7 @@ export default function LoginPage() {
         onSubmit={handleLogin}
         className="w-full max-w-md space-y-6 rounded-xl border p-6 shadow-lg bg-white"
       >
-        <h1 className="text-2xl font-bold text-center">Login to Finance-typeface</h1>
+        <h1 className="text-2xl font-bold text-center">Login to Finance-Typeface</h1>
 
         {/* Email Field */}
         <Input

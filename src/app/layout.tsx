@@ -7,7 +7,7 @@ import { Navbar } from "@/components/ui/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Finance-typeface",
+  title: "Finance-Typeface",
   description: "Smart Personal Finance Assistant",
 };
 

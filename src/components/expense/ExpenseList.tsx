@@ -77,7 +77,7 @@ export default function ExpenseList({ refreshKey = 0 }: { refreshKey?: number })
   }, [user, refreshKey]);
 
   return (
-    <Card className="bg-[#161b33] text-white h-full">
+    <Card className="bg-black text-white h-full border border-gray-800">
       <CardContent className="p-4">
         <div className="flex justify-between items-center mb-3">
           <h2 className="text-lg font-semibold">Latest Expenses</h2>
@@ -87,7 +87,7 @@ export default function ExpenseList({ refreshKey = 0 }: { refreshKey?: number })
           {loading ? (
             <div className="space-y-4">
               {Array.from({ length: 4 }).map((_, i) => (
-                <Skeleton key={i} className="h-10 w-full rounded-md bg-muted/30" />
+                <Skeleton key={i} className="h-10 w-full rounded-md bg-gray-800/50" />
               ))}
             </div>
           ) : expenses.length > 0 ? (
@@ -95,7 +95,7 @@ export default function ExpenseList({ refreshKey = 0 }: { refreshKey?: number })
               {expenses.map(({ id, category, amount, date }) => (
                 <li
                   key={id}
-                  className="flex justify-between items-center bg-[#1f2547] px-4 py-2 rounded-lg hover:bg-[#23294e] transition"
+                  className="flex justify-between items-center bg-gray-900 px-4 py-2 rounded-lg hover:bg-gray-800 transition"
                 >
                   <div>
                     <p className="text-sm font-medium">{category}</p>

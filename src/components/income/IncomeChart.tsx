@@ -103,25 +103,25 @@ export default function IncomeChart({ refreshKey = 0 }: IncomeChartProps) {
   }, [user, refreshKey]);
 
   return (
-    <Card className="bg-[#161b33] text-white h-full min-h-[300px]">
+    <Card className="bg-black text-white h-full min-h-[300px] border border-gray-800">
       <CardContent className="p-4 flex flex-col h-full">
         <h2 className="text-lg font-semibold mb-2">📈 Income Trend</h2>
         <div className="flex-grow">
           {loading ? (
-            <Skeleton className="w-full h-full rounded-md bg-muted/30" />
+            <Skeleton className="w-full h-full rounded-md bg-gray-800/50" />
           ) : (
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#2c2f49" />
-                <XAxis dataKey="name" stroke="#c3c3c3" />
-                <YAxis stroke="#c3c3c3" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#333333" />
+                <XAxis dataKey="name" stroke="#ffffff" />
+                <YAxis stroke="#ffffff" />
                 <Tooltip
-                  contentStyle={{ backgroundColor: "#1e213a", border: "none" }}
-                  labelStyle={{ color: "#60a5fa" }}
-                  itemStyle={{ color: "#60a5fa" }}
+                  contentStyle={{ backgroundColor: "#000000", border: "1px solid #333333" }}
+                  labelStyle={{ color: "#ffffff" }}
+                  itemStyle={{ color: "#ffffff" }}
                   formatter={(value: number) => [`₹${value.toFixed(2)}`, "Income"]}
                 />
-                <Bar dataKey="income" fill="#60a5fa" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="income" fill="#ffffff" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}

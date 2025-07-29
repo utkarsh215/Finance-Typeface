@@ -92,7 +92,7 @@ export default function IncomeList({ refreshKey = 0 }: { refreshKey?: number }) 
   }, [user, authLoading, refreshKey]);
 
   return (
-    <Card className="bg-[#161b33] text-white h-full">
+    <Card className="bg-black text-white h-full border border-gray-800">
       <CardContent className="p-4">
         <div className="flex justify-between items-center mb-3">
           <h2 className="text-lg font-semibold">Latest Income</h2>
@@ -102,7 +102,7 @@ export default function IncomeList({ refreshKey = 0 }: { refreshKey?: number }) 
           {loading ? (
             <div className="space-y-4">
               {Array.from({ length: 4 }).map((_, i) => (
-                <Skeleton key={i} className="h-10 w-full rounded-md bg-muted/30" />
+                <Skeleton key={i} className="h-10 w-full rounded-md bg-gray-800/50" />
               ))}
             </div>
           ) : incomes.length > 0 ? (
@@ -110,19 +110,19 @@ export default function IncomeList({ refreshKey = 0 }: { refreshKey?: number }) 
               {incomes.map(({ id, source, category, amount, date }) => (
                 <li
                   key={id}
-                  className="flex justify-between items-center bg-[#1f2547] px-4 py-2 rounded-lg hover:bg-[#23294e] transition"
+                  className="flex justify-between items-center bg-black border border-gray-800 px-4 py-2 rounded-lg hover:bg-gray-900 transition"
                 >
                   <div>
                     <p className="text-sm font-medium">
                       {source || category || "Misc"}
                     </p>
-                    <p className="text-xs text-purple-300 text-muted-foreground">
+                    <p className="text-xs text-gray-400">
                       {formatDate(date)}
                     </p>
                   </div>
                   <Badge
                     variant="outline"
-                    className="text-green-400 border-green-500 bg-transparent"
+                    className="text-white border-white bg-transparent"
                   >
                     ₹{amount}
                   </Badge>
@@ -130,7 +130,7 @@ export default function IncomeList({ refreshKey = 0 }: { refreshKey?: number }) 
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-muted-foreground text-center">
+            <p className="text-sm text-gray-400 text-center">
               No income records found.
             </p>
           )}

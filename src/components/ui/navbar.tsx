@@ -27,7 +27,7 @@ export function Navbar() {
     <nav className="bg-black text-white py-4 px-6 shadow-md fixed w-full z-50 border-b border-gray-800">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-xl font-bold flex items-center gap-2">
-          <span className="text-2xl">💸</span> Finance-typeface
+          Finance-Typeface
         </Link>
         
         {/* Mobile menu button */}

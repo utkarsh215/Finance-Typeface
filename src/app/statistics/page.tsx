@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { DateRange } from "react-day-picker";
 import { Download, Sparkles, Brain } from "lucide-react";
 import * as XLSX from "xlsx";
+import StatisticsGuide from "./guide";
 
 interface StatsData {
   totalIncome: number;
@@ -83,71 +84,86 @@ export default function StatisticsPage() {
         <p className="text-muted-foreground mb-6 text-sm">
           Select a date range to view financial summary and AI-powered insights.
         </p>
+        
+        <StatisticsGuide />
 
-        {/* Filters */}
-        <div className="flex flex-wrap items-center gap-4 mb-6">
-          <DateRangePicker date={dateRange} setDate={setDateRange} />
-          <Button onClick={fetchStats} disabled={!dateRange || loadingStats}>
-            {loadingStats ? "Loading..." : "View Statistics"}
-          </Button>
-          <Button variant="outline" onClick={exportToExcel} disabled={!stats}>
-            <Download className="w-4 h-4 mr-2" />
-            Export XLSX
-          </Button>
-        </div>
+        <Card className="bg-black text-white border border-gray-800 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg p-6 mb-6">
+          <CardContent className="p-0">
+            {/* Filters */}
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <DateRangePicker date={dateRange} setDate={setDateRange} />
+              <Button 
+                onClick={fetchStats} 
+                disabled={!dateRange || loadingStats}
+                className="bg-white hover:bg-gray-200 text-black disabled:opacity-70"
+              >
+                {loadingStats ? "Loading..." : "View Statistics"}
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={exportToExcel} 
+                disabled={!stats}
+                className="bg-white hover:bg-gray-200 text-black border-gray-300 disabled:opacity-70"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Export XLSX
+              </Button>
+            </div>
 
-        {/* Summary Cards */}
-        {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <StatCard label="Total Income" value={stats.totalIncome} color="text-green-400" />
-            <StatCard label="Total Expense" value={stats.totalExpense} color="text-red-400" />
-            <StatCard
-              label="Net Savings"
-              value={stats.totalIncome - stats.totalExpense}
-              color="text-yellow-300"
-            />
-          </div>
-        )}
+            {/* Summary Cards */}
+            {stats && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <StatCard label="Total Income" value={stats.totalIncome} color="text-green-400" />
+                <StatCard label="Total Expense" value={stats.totalExpense} color="text-red-400" />
+                <StatCard
+                  label="Net Savings"
+                  value={stats.totalIncome - stats.totalExpense}
+                  color="text-yellow-300"
+                />
+              </div>
+            )}
 
-        {/* Category Breakdown */}
-        {stats?.categoryTotals && Object.keys(stats.categoryTotals).length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            {Object.entries(stats.categoryTotals).map(([category, value], idx) => (
-              <Card key={idx} className="bg-[#1e2746]">
-                <CardContent className="p-4">
-                  <h4 className="text-sm text-muted-foreground text-purple-400">{category}</h4>
-                  <p className="text-lg font-semibold text-white">₹{Number(value)}</p>
+            {/* Category Breakdown */}
+            {stats?.categoryTotals && Object.keys(stats.categoryTotals).length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                {Object.entries(stats.categoryTotals).map(([category, value], idx) => (
+                  <Card key={idx} className="bg-black text-white border border-gray-800 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
+                    <CardContent className="p-4">
+                      <h4 className="text-sm text-muted-foreground text-gray-300">{category}</h4>
+                      <p className="text-lg font-semibold text-white">₹{Number(value)}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+
+            {/* AI Insight Section */}
+            {insightVisible && (
+              <Card className="bg-black text-white border border-gray-800 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
+                <CardContent className="p-6">
+                  <CardTitle className="flex items-center gap-2 text-white mb-6">
+                    <Brain size={20} className="text-gray-300" />
+                    Finance-Typeface AI Insights:
+                  </CardTitle>
+                  <div className="text-sm space-y-2">
+                    {loadingInsight ? (
+                      <p className="text-gray-300">⏳ Generating insights based on your financial data...</p>
+                    ) : aiInsight ? (
+                      aiInsight.split(/\n+/).map((line, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <Sparkles size={16} className="text-white mt-1 flex-shrink-0" />
+                          <p className="text-gray-300">{line.trim()}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-300">⚠️ No insights available for this date range.</p>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        )}
-
-        {/* AI Insight Section */}
-        {insightVisible && (
-          <Card className="bg-[#161b33] border border-dashed border-blue-500">
-            <CardContent className="p-6">
-              <CardTitle className="flex items-center gap-2 text-white mb-6">
-                <Brain size={20} className="text-purple-400" />
-                Finance-typeface AI Insights:
-              </CardTitle>
-              <div className="text-sm space-y-2">
-                {loadingInsight ? (
-                  <p className="text-blue-200">⏳ Generating insights based on your financial data...</p>
-                ) : aiInsight ? (
-                  aiInsight.split(/\n+/).map((line, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <Sparkles size={16} className="text-yellow-400 mt-1 flex-shrink-0" />
-                      <p className="text-emerald-300">{line.trim()}</p>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-red-300">⚠️ No insights available for this date range.</p>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        )}
+            )}
+          </CardContent>
+        </Card>
       </div>
     </DashboardLayout>
   );
@@ -156,7 +172,7 @@ export default function StatisticsPage() {
 // ---------- Reusable StatCard ----------
 function StatCard({ label, value, color }: { label: string; value: number; color: string }) {
   return (
-    <Card className="bg-[#161b33]">
+    <Card className="bg-black text-white border border-gray-800 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
       <CardContent className="p-4">
         <h4 className="text-sm text-muted-foreground text-white">{label}</h4>
         <p className={`text-2xl font-bold ${color}`}>₹{value}</p>

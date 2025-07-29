@@ -13,29 +13,26 @@ export default function ExpensePage() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-6 text-foreground">
-        {/* Page Header */}
-        <header>
-          <h1 className="text-2xl font-bold">Expense Management</h1>
-          <p className="text-sm text-muted-foreground">
-            Track and manage your expenses efficiently.
-          </p>
-        </header>
+      <div className="flex flex-col gap-6 text-foreground">
+        {/* Dashboard Heading */}
+        <div className="text-center mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold">Expense Management</h1>
+        </div>
 
         {/* Chart + Form Section */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="md:col-span-2 min-h-[300px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="md:col-span-2 min-h-[300px] transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
             <ExpenseChart refreshKey={refreshKey} />
           </div>
-          <div className="min-h-[300px]">
+          <div className="min-h-[300px] transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
             <AddExpenseForm onAdded={triggerRefresh} />
           </div>
-        </section>
+        </div>
 
         {/* Expense Table/List */}
-        <section>
+        <div className="transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
           <ExpenseList refreshKey={refreshKey} />
-        </section>
+        </div>
       </div>
     </DashboardLayout>
   );

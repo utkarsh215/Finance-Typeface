@@ -153,7 +153,7 @@ export default function AddExpenseForm({ onAdded }: AddExpenseFormProps) {
   };
 
   return (
-    <Card className="bg-[#161b33] text-white border-none">
+    <Card className="bg-black text-white border border-gray-800">
       <CardHeader>
         <CardTitle className="text-xl">Add New Expense</CardTitle>
       </CardHeader>
@@ -166,9 +166,9 @@ export default function AddExpenseForm({ onAdded }: AddExpenseFormProps) {
               accept="image/*,application/pdf"
               onChange={handleFileUpload}
               disabled={isExtracting || isSubmitting}
-              className="text-white file:text-white file:bg-[#1f2547] file:border-none"
+              className="text-white file:text-white file:bg-black file:border-gray-700"
             />
-            {isExtracting && <p className="text-sm animate-pulse text-indigo-300">Extracting...</p>}
+            {isExtracting && <p className="text-sm animate-pulse text-gray-300">Extracting...</p>}
           </div>
 
           <div className="space-y-1">
@@ -182,9 +182,9 @@ export default function AddExpenseForm({ onAdded }: AddExpenseFormProps) {
                 onChange={(e) => setAmount(e.target.value)}
                 disabled={isSubmitting}
                 placeholder="0.00"
-                className="bg-[#1f2547] border pl-10"
+                className="bg-black border border-gray-700 pl-10"
               />
-              <IndianRupee className="absolute left-3 top-2.5 h-4 w-4 text-indigo-400" />
+              <IndianRupee className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
             </div>
           </div>
 
@@ -195,7 +195,7 @@ export default function AddExpenseForm({ onAdded }: AddExpenseFormProps) {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               disabled={isSubmitting}
-              className="bg-[#1f2547] border w-full py-2 px-3 rounded"
+              className="bg-black border border-gray-700 w-full py-2 px-3 rounded"
             >
               <option value="">Select category</option>
               {CATEGORY_OPTIONS.map((c) => (
@@ -213,7 +213,7 @@ export default function AddExpenseForm({ onAdded }: AddExpenseFormProps) {
                 onChange={(e) => setCustomCategory(e.target.value)}
                 disabled={isSubmitting}
                 placeholder="Enter category"
-                className="bg-[#1f2547] border text-white"
+                className="bg-black border border-gray-700 text-white"
               />
             </div>
           )}
@@ -225,17 +225,17 @@ export default function AddExpenseForm({ onAdded }: AddExpenseFormProps) {
                 selected={date}
                 onChange={(d) => setDate(d)}
                 disabled={isSubmitting}
-                className="bg-[#1f2547] text-white w-full py-2 px-3 rounded border pl-10"
+                className="bg-black text-white w-full py-2 px-3 rounded border border-gray-700 pl-10"
                 placeholderText="Select a date"
               />
-              <CalendarIcon className="absolute left-3 top-2.5 h-4 w-4 text-pink-400" />
+              <CalendarIcon className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
             </div>
           </div>
 
           <Button
             type="submit"
             disabled={isSubmitting || isExtracting}
-            className="w-full mt-2 bg-pink-600 hover:bg-pink-700 text-white"
+            className="w-full mt-2 bg-white hover:bg-gray-200 text-black disabled:opacity-70"
           >
             {isSubmitting ? "Saving..." : "Add Expense"}
           </Button>

@@ -45,7 +45,7 @@ export default function Sidebar() {
       >
         <Link href="/">
         <div className="mb-10 flex flex-col items-start">
-         <h1 className="text-2xl font-extrabold tracking-tight">💸 Finance-typeface</h1>
+         <h1 className="text-2xl font-extrabold tracking-tight">Finance-Typeface</h1>
           <p className="text-xs text-muted-foreground">Your Finance Assistant</p>
         </div>
         </Link> 

@@ -162,7 +162,7 @@ export default function AddIncomeForm({ onAdded }: AddIncomeFormProps) {
   };
 
   return (
-    <Card className="bg-[#161b33] text-white border-none">
+    <Card className="bg-black text-white border border-gray-800">
       <CardHeader>
         <CardTitle className="text-xl">Add New Income</CardTitle>
       </CardHeader>
@@ -176,9 +176,9 @@ export default function AddIncomeForm({ onAdded }: AddIncomeFormProps) {
               accept="image/*,application/pdf"
               onChange={handleFileUpload}
               disabled={isExtracting || isSubmitting}
-              className="text-white file:text-white file:bg-[#1f2547] file:border-none"
+              className="text-white file:text-white file:bg-black file:border file:border-gray-800"
             />
-            {isExtracting && <p className="text-sm animate-pulse text-indigo-300">Extracting...</p>}
+            {isExtracting && <p className="text-sm animate-pulse text-gray-400">Extracting...</p>}
           </div>
 
           {/* Amount */}
@@ -193,9 +193,9 @@ export default function AddIncomeForm({ onAdded }: AddIncomeFormProps) {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 disabled={isSubmitting}
-                className="bg-[#1f2547] pl-10"
+                className="bg-black border-gray-800 pl-10"
               />
-              <IndianRupee className="absolute left-3 top-2.5 h-4 w-4 text-indigo-400" />
+              <IndianRupee className="absolute left-3 top-2.5 h-4 w-4 text-white" />
             </div>
           </div>
 
@@ -207,7 +207,7 @@ export default function AddIncomeForm({ onAdded }: AddIncomeFormProps) {
               value={source}
               onChange={(e) => setSource(e.target.value)}
               disabled={isSubmitting}
-              className="w-full bg-[#1f2547] text-white border px-3 py-2 rounded"
+              className="w-full bg-black text-white border border-gray-800 px-3 py-2 rounded"
             >
               <option value="">Select Source</option>
               {SOURCE_OPTIONS.map((option) => (
@@ -223,7 +223,7 @@ export default function AddIncomeForm({ onAdded }: AddIncomeFormProps) {
                   value={customSource}
                   onChange={(e) => setCustomSource(e.target.value)}
                   disabled={isSubmitting}
-                  className="bg-[#1f2547] border text-white"
+                  className="bg-black border-gray-800 text-white"
                 />
               </div>
             )}
@@ -236,11 +236,11 @@ export default function AddIncomeForm({ onAdded }: AddIncomeFormProps) {
               <DatePicker
                 selected={date}
                 onChange={(d) => setDate(d)}
-                className="bg-[#1f2547] text-white w-full py-2 px-3 rounded border pl-10"
+                className="bg-black text-white w-full py-2 px-3 rounded border border-gray-800 pl-10"
                 placeholderText="Select a date"
                 disabled={isSubmitting}
               />
-              <CalendarIcon className="absolute left-3 top-2.5 h-4 w-4 text-pink-400" />
+              <CalendarIcon className="absolute left-3 top-2.5 h-4 w-4 text-white" />
             </div>
           </div>
 
@@ -248,7 +248,7 @@ export default function AddIncomeForm({ onAdded }: AddIncomeFormProps) {
           <Button
             type="submit"
             disabled={isSubmitting || isExtracting}
-            className="w-full mt-2 bg-indigo-600 hover:bg-indigo-700 text-white disabled:opacity-70"
+            className="w-full mt-2 bg-white hover:bg-gray-200 text-black disabled:opacity-70"
           >
             {isSubmitting ? "Saving..." : "Add Income"}
           </Button>

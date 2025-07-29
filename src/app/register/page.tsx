@@ -56,7 +56,7 @@ export default function RegisterPage() {
         onSubmit={handleRegister}
         className="w-full max-w-md space-y-6 rounded-xl border p-6 shadow-lg bg-white"
       >
-        <h1 className="text-2xl font-bold text-center">Register for Finance-typeface</h1>
+        <h1 className="text-2xl font-bold text-center">Register for Finance-Typeface</h1>
 
         {/* Full Name */}
         <Input

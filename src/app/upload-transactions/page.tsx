@@ -109,11 +109,16 @@ export default function UploadTransactionsPage() {
 
   return (
     <DashboardLayout>
-      <div className="max-w-4xl mx-auto p-6 text-center">
-        <Card className="bg-[#161b33] shadow-lg border-none">
+      <div className="flex flex-col gap-6 text-foreground">
+        {/* Dashboard Heading */}
+        <div className="text-center mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold">Upload Bank Statements</h1>
+        </div>
+        
+        <Card className="bg-black text-white border border-gray-800 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
           <CardContent className="p-6">
-            <h2 className="text-3xl font-bold text-white mb-2">Upload Bank Statement</h2>
-            <p className="text-purple-300 text-base mb-6">
+            <h2 className="text-xl font-semibold mb-2">Upload Bank Statement</h2>
+            <p className="text-gray-300 text-base mb-6">
               Upload a PDF, Excel, or CSV file and extract transactions using AI.
             </p>
 
@@ -122,31 +127,31 @@ export default function UploadTransactionsPage() {
                 type="file"
                 accept=".pdf,.xlsx,.xls,.csv"
                 onChange={(e) => setFile(e.target.files?.[0] || null)}
-                className="w-full max-w-sm text-white file:text-white file:bg-[#1f2547] file:border-none"
+                className="w-full max-w-sm text-white file:text-white file:bg-black file:border file:border-gray-700"
               />
               <Button
                 onClick={handleUpload}
                 disabled={!file || loading}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
+                className="bg-white hover:bg-gray-200 text-black disabled:opacity-70"
               >
                 {loading ? "Extracting..." : "Upload"}
               </Button>
             </div>
 
             {transactions.length > 0 ? (
-              <div className="bg-white rounded-xl shadow-md p-4 mb-4 text-left">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              <div className="bg-gray-900 rounded-xl p-4 mb-4 text-left border border-gray-800">
+                <h3 className="text-xl font-semibold text-white mb-2">
                   Extracted Transactions
                 </h3>
 
-                <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <div className="flex justify-between text-sm text-gray-300 mb-2">
                   <span>Total Income: ₹{totalAmount("Income")}</span>
                   <span>Total Expenses: ₹{totalAmount("Expense")}</span>
                 </div>
 
                 <div className="max-h-[300px] overflow-auto rounded-lg">
-                  <table className="w-full text-sm text-left border border-gray-200 rounded-md overflow-hidden">
-                    <thead className="bg-gray-100 text-gray-700 font-medium sticky top-0 z-10">
+                  <table className="w-full text-sm text-left border border-gray-800 rounded-md overflow-hidden">
+                    <thead className="bg-black text-white font-medium sticky top-0 z-10">
                       <tr>
                         <th className="px-3 py-2">Date</th>
                         <th className="px-3 py-2">Description</th>
@@ -155,23 +160,23 @@ export default function UploadTransactionsPage() {
                         <th className="px-3 py-2">Category</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="bg-gray-900 text-white">
                       {transactions.map((tx, i) => (
                         <tr
                           key={i}
-                          className="border-t hover:bg-gray-50 transition duration-150"
+                          className="border-t border-gray-800 hover:bg-gray-800 transition duration-150"
                         >
                           <td className="px-3 py-2">{tx.date}</td>
                           <td className="px-3 py-2">{tx.description}</td>
-                          <td className="px-3 py-2 text-gray-900 font-semibold">
+                          <td className="px-3 py-2 text-white font-semibold">
                             ₹{Math.abs(tx.amount)}
                           </td>
                           <td className="px-3 py-2">
                             <span
                               className={`text-xs px-2 py-1 rounded-full font-medium ${
                                 tx.type === "CR"
-                                  ? "bg-green-100 text-green-700"
-                                  : "bg-red-100 text-red-700"
+                                  ? "bg-black text-white border border-green-500"
+                                  : "bg-black text-white border border-red-500"
                               }`}
                             >
                               {tx.type === "CR" ? "Credit" : "Debit"}
@@ -181,8 +186,8 @@ export default function UploadTransactionsPage() {
                             <span
                               className={`text-xs px-2 py-1 rounded-full font-medium ${
                                 tx.classifiedAs === "Income"
-                                  ? "bg-blue-100 text-blue-700"
-                                  : "bg-yellow-100 text-yellow-700"
+                                  ? "bg-black text-white border border-white"
+                                  : "bg-black text-white border border-red-400"
                               }`}
                             >
                               {tx.classifiedAs}
@@ -198,14 +203,14 @@ export default function UploadTransactionsPage() {
                   <Button
                     onClick={handleSaveToFirebase}
                     disabled={saving}
-                    className="bg-green-600 hover:bg-green-700"
+                    className="bg-white hover:bg-gray-200 text-black disabled:opacity-70"
                   >
                     {saving ? "Saving..." : "Save All to Database"}
                   </Button>
                 </div>
               </div>
             ) : (
-              <p className="text-sm text-purple-300 mt-6">
+              <p className="text-sm text-gray-300 mt-6">
                 No transactions extracted yet. Upload a statement to begin.
               </p>
             )}
