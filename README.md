@@ -134,11 +134,4 @@ http://localhost:3000
 3. Create **Firestore** (production mode with security rules referencing `request.auth.uid`).
 5. Copy config → `.env.local` as `NEXT_PUBLIC_FIREBASE_*` variables.
 
----
-
-## License
-
-MIT (proposed). Add a `LICENSE` file if absent.
-
----
 
