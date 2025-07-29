@@ -81,6 +81,7 @@ Firestore Collections
 ├── users/{uid}
 ├── income/{doc}: { uid, amount, source, date, createdAt }
 └── expenses/{doc}: { uid, amount, category, date, createdAt }
+```
 ---
 
 ## Environment Variables
